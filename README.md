@@ -4,17 +4,17 @@ scalability of your automated tests.
 
 ### **Features**
 
-**Java-Based**: Built using the Java programming language.\
+**Java-Based**: Built using the Java programming language.
 
-**TestNG Integration**: Utilizes TestNG for efficient test management and parallel execution.\
+**TestNG Integration**: Utilizes TestNG for efficient test management and parallel execution.
 
-**Maven Project**: Managed by Apache Maven for easy dependency management and build processes.\
+**Maven Project**: Managed by Apache Maven for easy dependency management and build processes.
 
-**Page Factory Design**: Follows the Page Factory design pattern for creating and maintaining page objects.\
+**Page Factory Design**: Follows the Page Factory design pattern for creating and maintaining page objects.
 
-**Appium Integration**: Seamless integration with Appium for mobile app automation.\
+**Appium Integration**: Seamless integration with Appium for mobile app automation.
 
-**Configurable**: Easily configurable with external configuration files for flexibility.\
+**Configurable**: Easily configurable with external configuration files for flexibility.
 
 **Log4j**: Incorporates logging for better traceability and debugging.
 
@@ -25,9 +25,9 @@ scalability of your automated tests.
 Prerequisites
 Before you begin, ensure you have the following installed:
 
-Java Development Kit (JDK) 11\
-Maven\
-Android SDK- Should be installed with path set in ANDROID_HOME env variable in bash\
+Java Development Kit (JDK) 11
+Maven
+Android SDK- Should be installed with path set in ANDROID_HOME env variable in bash
 Update the appium.properties before running the tests with the deviceName (physical/emulator).
 
 ### **Installation**
