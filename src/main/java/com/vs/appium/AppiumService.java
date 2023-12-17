@@ -1,6 +1,8 @@
 package com.vs.appium;
 
+import com.vs.utils.AppiumConfigs;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -8,28 +10,30 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
-public class AppiumService {
+public class AppiumService extends AppiumConfigs {
 
     private final AppiumDriverLocalService appiumService;
     private final UiAutomator2Options options;
-
     private static final ThreadLocal<AppiumService> appiumServiceThreadLocal = new ThreadLocal<>();
     private static final ThreadLocal<AppiumDriver> driverThreadLocal = new ThreadLocal<>();
 
     public AppiumService() {
         options = new UiAutomator2Options();
-        options.setDeviceName("emulator-5554");
-        options.setApp("/Users/vaibhavsaxena/IdeaProjects/AutomationFM/src/test/resources/General-Store.apk");
+        options.setDeviceName(DEVICE_NAME);
+        options.setApp(PATH_TO_APK);
         options.skipLogcatCapture();
         options.setSkipLogCapture(true);
         options.setSkipLogcatCapture(true);
         options.skipDeviceInitialization();
-        options.setNoReset(false);
-        options.setCapability("forceAppLaunch",true);
+        options.setNoReset(true);
+        options.setCapability("forceAppLaunch", true);
 
         appiumService = new AppiumServiceBuilder()
                 .usingPort(0)
@@ -90,4 +94,50 @@ public class AppiumService {
         return destinationFile;
     }
 
+    public static void startEmulator() {
+        String startEmulatorCommand = PATH_TO_ANDROID_SDK + "/emulator/emulator -avd " + DEVICE_NAME ;
+        System.out.println("startEmulatorCommand " + startEmulatorCommand);
+        if (!isEmulatorRunning()) {
+            try {
+                Runtime.getRuntime().exec(startEmulatorCommand);
+                TimeUnit.SECONDS.sleep(30);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void stopEmulator() {
+        String stopEmulatorCommand = PATH_TO_ANDROID_SDK + "/platform-tools/adb -s " + DEVICE_NAME + " emu kill";
+        System.out.println("stopEmulatorCommand" + stopEmulatorCommand);
+        try {
+            Runtime.getRuntime().exec(stopEmulatorCommand);
+            TimeUnit.SECONDS.sleep(10);
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static boolean isEmulatorRunning(){
+        String adbCommand = PATH_TO_ANDROID_SDK + "/platform-tools/adb devices";
+        Process process;
+        try {
+            process = Runtime.getRuntime().exec(adbCommand);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while (true) {
+            try {
+                if ((line = reader.readLine()) == null) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (line.contains(DEVICE_NAME)) {
+                return true; // Emulator is already running
+            }
+        }
+        return false; // Emulator is not running
+    }
 }

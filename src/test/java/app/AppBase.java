@@ -11,9 +11,9 @@ public class AppBase extends AppiumService {
     public FormPage formPage;
     public AndroidDriver driver;
 
-
     @BeforeClass
     public void beforeClassSetup() {
+        startEmulator();
         getInstance();
         driver = (AndroidDriver) getDriverInstance();
         formPage = new FormPage(driver);
@@ -24,5 +24,6 @@ public class AppBase extends AppiumService {
     public void afterClassSetup() {
         stopAppiumServer();
         stopDriver();
+        stopEmulator();
     }
 }
