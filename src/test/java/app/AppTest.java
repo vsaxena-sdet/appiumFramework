@@ -9,7 +9,7 @@ public class AppTest extends AppBase {
 
     @Test(groups = {"Smoke"})
     public void FillForm() {
-        formPage.setNameField("Vaibhav");
+//        formPage.setNameField("Vaibhav");
         formPage.setGender("male");
         formPage.setCountrySelection("Argentina");
         formPage.submitForm();

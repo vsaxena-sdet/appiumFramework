@@ -2,7 +2,6 @@ package com.vs.appium;
 
 import com.vs.utils.AppiumConfigs;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -39,6 +38,16 @@ public class AppiumService extends AppiumConfigs {
                 .usingPort(0)
                 .withCapabilities(options)
                 .build();
+
+//        appiumService = AppiumDriverLocalService
+//                .buildService(new AppiumServiceBuilder()
+//                        .usingDriverExecutable(new File("/usr/local/bin/node"))
+//                        .withCapabilities(options)
+//                        .withAppiumJS(
+//                                new File(
+//                                        "/usr/local/lib/node_modules/appium/build/lib/main.js"))
+//                        .withIPAddress("127.0.0.1").usingAnyFreePort());
+//        appiumService.start();
 
         System.out.println("Appium server started at port:" + appiumService.getUrl().getPort());
     }
@@ -95,7 +104,7 @@ public class AppiumService extends AppiumConfigs {
     }
 
     public static void startEmulator() {
-        String startEmulatorCommand = PATH_TO_ANDROID_SDK + "/emulator/emulator -avd " + DEVICE_NAME ;
+        String startEmulatorCommand = PATH_TO_ANDROID_SDK + "/emulator/emulator -avd " + DEVICE_NAME;
         System.out.println("startEmulatorCommand " + startEmulatorCommand);
         if (!isEmulatorRunning()) {
             try {
@@ -118,7 +127,7 @@ public class AppiumService extends AppiumConfigs {
         }
     }
 
-    private static boolean isEmulatorRunning(){
+    private static boolean isEmulatorRunning() {
         String adbCommand = PATH_TO_ANDROID_SDK + "/platform-tools/adb devices";
         Process process;
         try {

@@ -11,14 +11,6 @@ public class FormPage extends AbstractPageClass {
 
     AppiumDriver driver;
 
-//    public FormPage(AndroidDriver driver)
-//    {
-//        super(driver);
-//        this.driver = driver;
-//        PageFactory.initElements(new AppiumFieldDecorator(driver), this); //
-//
-//    }
-
     @AndroidFindBy(id="com.androidsample.generalstore:id/nameField")
     private WebElement nameField;
 
