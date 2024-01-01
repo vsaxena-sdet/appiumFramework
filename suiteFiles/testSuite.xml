@@ -2,7 +2,12 @@
 <suite name="UI Test Suite" verbose="1">
     <test name="Regression Tests" parallel="classes" thread-count="1">
         <classes>
-            <class name="app.AppTest"/>
+            <class name="app.AppTest">
+                <methods>
+<!--                    if needs to exclude a specific case->use exclude,w/o regex-->
+                    <exclude name="FillForm_failureCase"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

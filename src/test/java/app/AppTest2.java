@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AppTest extends AppBase {
+public class AppTest2 extends AppBase {
 
 
     @Test(groups = {"Smoke"})

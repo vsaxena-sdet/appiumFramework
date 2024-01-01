@@ -30,7 +30,7 @@ public class AppiumService extends AppiumConfigs {
         options.skipLogcatCapture();
         options.setSkipLogCapture(true);
         options.setSkipLogcatCapture(true);
-        options.skipDeviceInitialization();
+//        options.skipDeviceInitialization();
         options.setNoReset(true);
         options.setCapability("forceAppLaunch", true);
 

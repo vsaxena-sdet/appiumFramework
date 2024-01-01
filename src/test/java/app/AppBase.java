@@ -3,15 +3,14 @@ package app;
 import com.vs.appium.AppiumService;
 import com.vs.pages.FormPage;
 import io.appium.java_client.android.AndroidDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 
 public class AppBase extends AppiumService {
 
     public FormPage formPage;
     public AndroidDriver driver;
 
-    @BeforeClass
+    @BeforeSuite
     public void beforeClassSetup() {
         startEmulator();
         getInstance();
@@ -19,8 +18,14 @@ public class AppBase extends AppiumService {
         formPage = new FormPage(driver);
     }
 
+    @BeforeMethod
+    public void beforeMethod(){
+        driver.terminateApp("com.androidsample.generalstore");
+        driver.activateApp("com.androidsample.generalstore");
+    }
 
-    @AfterClass
+
+    @AfterSuite
     public void afterClassSetup() {
         stopAppiumServer();
         stopDriver();
